@@ -1,0 +1,23 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify executable exists
+        run: test -f "LED7Seg HEX Gen.exe"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "LED7Seg HEX Gen.exe"
